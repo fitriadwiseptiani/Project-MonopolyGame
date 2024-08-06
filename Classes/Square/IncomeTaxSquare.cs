@@ -9,9 +9,9 @@ public class IncomeTaxSquare : SpecialSquare
     }
     public virtual bool EffectSquare(IPlayer player, GameController game)
     {
-        // PlayerData playerData = game.GetPlayerData(player);
-        // decimal tax = playerData.Balance * 0.1m;
-        // playerData.DeductBalance(tax);
+        PlayerData playerData = game.GetPlayerData(player);
+        decimal tax = playerData.balance * 0.1m;
+        playerData.DeductBalance((int)tax);
         return true;
     }
 }

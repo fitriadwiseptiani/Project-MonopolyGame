@@ -9,8 +9,8 @@ public class CardChanceSquare : SpecialSquare
     }
     public override bool EffectSquare(IPlayer player, GameController game)
     {
-        // ICard card = game.DrawCardChance();
-        // card.ActionCard(player, game);
+        ICard card = game.DrawCardChance();
+        card.ActionCard(player, game);
         return true;
     }
 }

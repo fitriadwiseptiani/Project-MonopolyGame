@@ -7,7 +7,7 @@ public class GoToJailSquare : SpecialSquare
     public override bool EffectSquare(IPlayer player, GameController game)
     {
         // Player goes to jail
-        // game.HandleGoToJail(player);
+        game.HandleGoToJail(player);
         return true;
     }
 }

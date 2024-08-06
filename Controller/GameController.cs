@@ -241,10 +241,30 @@ public class GameController
         int newIndex = (currentIndex + diceRoll) % _board.SquareBoard.Count;
         data.playerPosition = _board.SquareBoard[newIndex];
     }
-
+    public void HandleGoToJail(IPlayer player){
+        PlayerData data = GetPlayerData(player);
+        var positionPlayer = _board.SquareBoard[10];
+        data.playerPosition = positionPlayer;
+    }
     public int GetPlayerPosition(PlayerData data)
     {
         return _board.SquareBoard.IndexOf(data.playerPosition);
+    }
+    public ICard DrawCardChance()
+    {
+        Random rdm = new Random();
+        int index = rdm.Next(ChanceCards.Count);
+        ICard card = ChanceCards[index];
+        ChanceCards.RemoveAt(index);
+        return card;
+    }
+    public ICard DrawCardCommunity()
+    {
+        Random rdm = new Random();
+        int index = rdm.Next(CommunityCards.Count);
+        ICard card = CommunityCards[index];
+        CommunityCards.RemoveAt(index);
+        return card;
     }
     public void GetWinner(IPlayer player){
         if(!IsBankrupt(player)){
