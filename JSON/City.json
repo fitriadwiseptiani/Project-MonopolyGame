@@ -30,6 +30,102 @@
       "RentPrice": 8
     },
     {
+      "Id": 12,
+      "Name": "Venice",
+      "Price": 140,
+      "RentPrice": 10
+    },
+    {
+      "Id": 14,
+      "Name": "Milan",
+      "Price": 140,
+      "RentPrice": 10
+    },
+    {
+      "Id": 15,
+      "Name": "Rome",
+      "Price": 160,
+      "RentPrice": 12
+    },
+    {
+      "Id": 17,
+      "Name": "Frankfurt",
+      "Price": 180,
+      "RentPrice": 14
+    },
+    {
+      "Id": 19,
+      "Name": "Munich",
+      "Price": 180,
+      "RentPrice": 14
+    },
+    {
+      "Id": 20,
+      "Name": "Berlin",
+      "Price": 200,
+      "RentPrice": 16
+    },
+    {
+      "Id": 22,
+      "Name": "Shenzhen",
+      "Price": 220,
+      "RentPrice": 18
+    },
+    {
+      "Id": 24,
+      "Name": "Beijing",
+      "Price": 220,
+      "RentPrice": 18
+    },
+    {
+      "Id": 25,
+      "Name": "Shanghai",
+      "Price": 240,
+      "RentPrice": 20
+    },
+    {
+      "Id": 27,
+      "Name": "Lyon",
+      "Price": 260,
+      "RentPrice": 22
+    },
+    {
+      "Id": 28,
+      "Name": "Toulouse",
+      "Price": 260,
+      "RentPrice": 22
+    },
+    {
+      "Id": 30,
+      "Name": "Paris",
+      "Price": 280,
+      "RentPrice": 24
+    },
+{
+      "Id": 32,
+      "Name": "Liverpool",
+      "Price": 300,
+      "RentPrice": 26
+    },
+    {
+      "Id": 33,
+      "Name": "Manchester",
+      "Price": 300,
+      "RentPrice": 26
+    },
+    {
+      "Id": 35,
+      "Name": "London",
+      "Price": 320,
+      "RentPrice": 28
+    },
+    {
+      "Id": 38,
+      "Name": "San Francisco",
+      "Price": 350,
+      "RentPrice": 35
+    },
+    {
       "Id": 39,
       "Name": "Sukolilo",
       "Price": 350,
@@ -41,4 +137,5 @@
       "Price": 400,
       "RentPrice": 50
     }
+    
 ]

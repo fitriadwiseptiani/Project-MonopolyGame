@@ -1,16 +1,15 @@
-// namespace MonopolyGame.Classes.Card.CommunityCard.ActionCard;
+namespace MonopolyGame;
 
-// public class ConsultancyFee : ICardCommunity
-// {
-//     public int Id { get; }
-//     public string Description { get; }
-//     public TypeCard typeCard { get; }
+public class ConsultancyFee : CardCommunity
+{
+    public int Id { get; }
+    public string Description { get; }
 
-//     public bool ActionCard(IPlayer player, GameController game)
-//     {
-//         game.GetPlayerData(player).AddBalance(25);
-//         return true;
+    public bool ActionCard(IPlayer player, GameController game)
+    {
+        game.GetPlayerData(player).AddBalance(25);
+        return true;
 
 
-//     }
-// }
+    }
+}

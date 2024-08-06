@@ -9,8 +9,15 @@ public class CardChanceSquare : SpecialSquare
     }
     public override bool EffectSquare(IPlayer player, GameController game)
     {
-        ICard card = game.DrawCardChance();
-        card.ActionCard(player, game);
+        ICard card = game.DrawCardCommunity();
+        if (card != null)
+        {
+            card.ActionCard(player, game);
+        }
+        else
+        {
+            throw new Exception("Tidak ada kartu Chance yang tersedia.");
+        }
         return true;
     }
 }

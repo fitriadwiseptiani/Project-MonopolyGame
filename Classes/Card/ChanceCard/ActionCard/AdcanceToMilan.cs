@@ -8,8 +8,13 @@ public class AdvanceToMilan : CardChance
 
     public bool ActionCard(IPlayer player, GameController game)
     {
-        // var milan = game.GetBoard().SquareBoard.First(s => s is Property && s.Name == "Milan");
-        // game.MovePlayer(player, milan, null); // Pindahkan pemain ke kota Londonn
-        return true;
+        var milan = game.GetBoard().SquareBoard.FirstOrDefault(s => s is Property && s.Name == "Milan");
+
+        if (milan != null)
+        {
+            game.MovePlayerToSquare(player, milan); // Pindahkan pemain ke Milan
+            return true;
+        }
+        return false;
     }
 }

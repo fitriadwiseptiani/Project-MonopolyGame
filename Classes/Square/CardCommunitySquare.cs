@@ -10,6 +10,12 @@ public class CardCommunitySquare : SpecialSquare
     public override bool EffectSquare(IPlayer player, GameController game)
     {
         ICard card = game.DrawCardCommunity();
+        if (card == null)
+        {
+            return false;
+        }
+
+        // Terapkan efek kartu
         card.ActionCard(player, game);
         return true;
     }

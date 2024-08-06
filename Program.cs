@@ -136,6 +136,12 @@ class Program
 {
     static void Main()
     {
+        Console.WriteLine("########################################################################################");
+        Console.WriteLine("|											|");
+        Console.WriteLine("|					Monopoly Game					|");
+        Console.WriteLine("|											|");
+        Console.WriteLine("########################################################################################");
+
         // Inisialisasi objek dice
         IDice dice = new Dice(new int[] { 1, 2, 3, 4, 5, 6 });
 
@@ -153,7 +159,7 @@ class Program
 
         while (!startGame)
         {
-            Console.WriteLine("\n Masukkan nama untuk player yang bermain atau 'start' untuk memulai permainan:");
+            Console.WriteLine("Masukkan nama untuk player yang akan bermain atau 'start' untuk memulai permainan:");
             string input = Console.ReadLine();
 
             if (input.ToLower() == "start")
@@ -172,7 +178,10 @@ class Program
             {
                 if (gameController.GetPlayers().Count >= maxPlayer)
                 {
-                    Console.WriteLine("\nCannot add more players. The maximum number of players has been reached.");
+                    Console.WriteLine("\nTidak bisa menambahkan pemain lagi.");
+                    startGame = true;
+                    Console.WriteLine("\nGame started!");
+                    gameController.Start();
                 }
                 else
                 {
@@ -180,7 +189,8 @@ class Program
                     IPlayer newPlayer = new Player(playerIdCounter, input);
                     PlayerData playerData = new PlayerData(newPlayer, 2000);
                     gameController.AddPlayer(newPlayer, playerData);
-                    Console.WriteLine($"\n{input} has joined the game with $2000.");
+                    // int[] myPlayers = new GetPlayer
+                    Console.WriteLine($"{input} baru saja bergabung pada permainan dan mendapatkan $2000.");
 
                     playerIdCounter++;
                 }
