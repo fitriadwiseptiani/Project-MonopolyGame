@@ -12,3 +12,4 @@ D:\Formulatrix\Project\MonopolyGame\MonopolyGame\obj\Debug\net8.0\refint\Monopol
 D:\Formulatrix\Project\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.pdb
 d:\Formulatrix\Project\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.genruntimeconfig.cache
 d:\Formulatrix\Project\MonopolyGame\MonopolyGame\obj\Debug\net8.0\ref\MonopolyGame.dll
+d:\Formulatrix\Project\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.sourcelink.json

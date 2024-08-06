@@ -17,7 +17,8 @@ public class Property : ISquare
         RentPrice = rentPrice;
         Owner = null;
     }
-    public void SetOwner(IPlayer player){
+    public void SetOwner(IPlayer player)
+    {
         Owner = player;
     }
     public bool EffectSquare(IPlayer player, GameController game)
@@ -40,15 +41,31 @@ public class Property : ISquare
 
         return false;
     }
-    public virtual void PayRent(IPlayer player, GameController game)
-    { }
-
-    protected void BuyProperty(IPlayer player, GameController game)
+    public void PayRent(IPlayer player, GameController game)
     {
-        Owner = player;
         PlayerData playerData = game.GetPlayerData(player);
-        playerData.DeductBalance(Price);
-        // game.BuyProperty?.Invoke(player, this);
+        if(!(Owner == player)){
+            playerData.DeductBalance(RentPrice);
+        }
+        else
+        {
+            throw new InvalidOperationException($"Properti adalah milik Anda");
+        }
+    }
+
+    public void BuyProperty(IPlayer player, GameController game)
+    {
+        PlayerData data = game.GetPlayerData(player);
+        if (Owner == null)
+        {
+            data.DeductBalance(Price);
+        }
+        else
+        {
+            throw new InvalidOperationException($"Properti sudah dimiliki oleh {data.Name}");
+        }
+
+        SetOwner(player);
     }
 
     internal int CalculateRent()

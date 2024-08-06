@@ -68,6 +68,7 @@ public class GameController
         }
 
         PlayerData data = GetPlayerData(player);
+        var aset = data.GetPropertiesPlayer(player);
 
         if (data == null)
         {
@@ -75,16 +76,39 @@ public class GameController
             return;
         }
 
-        string propertiesOwned = data.PropertyPlayer != null && data.PropertyPlayer.Count > 0
-            ? string.Join(", ", data.PropertyPlayer.Select(p => p.Name))
-            : "Tidak ada properti";
-        
+        string propertiesOwned = aset != null && aset.Count > 0
+        ? string.Join("\n", aset.Select(p => $"Id: {p.Id}, Nama: {p.Name}, Price: ${p.Price}, Owner: {p.Owner.Name}"))
+        : "Tidak ada properti";
+
         OnDisplayMessage?.Invoke("\n*Data Player :");
         string playerInfo = $"ID: {player.Id}, \nNama: {player.Name}, \nSaldo: ${data.balance}, \nProperti: {propertiesOwned}";
 
         OnDisplayMessage?.Invoke(playerInfo);
     }
 
+    public void GetPropertyInfo(IPlayer player){
+        if (player == null)
+        {
+            OnDisplayMessage?.Invoke("Pemain tidak valid.");
+            return;
+        }
+
+        if (!_player.ContainsKey(player))
+        {
+            OnDisplayMessage?.Invoke("Pemain tidak ditemukan.");
+            return;
+        }
+        PlayerData data = GetPlayerData(player);
+        ISquare currentSquare = data.playerPosition;
+
+        if(currentSquare is Property property){
+            string propertyInfo = $"\nId: {property.Id}, \nNama: {property.Name}, \nHarga: ${property.Price}, \nPemilik: {property.Owner?.Name ?? "Belum Dimiliki"}";
+            OnDisplayMessage?.Invoke($"\nInformasi Properti di Posisi Saat Ini:\n{propertyInfo}");
+        }
+        else{
+            OnDisplayMessage?.Invoke("Posisi ini bukanlah properti");
+        }
+    }
 
     public List<IPlayer> GetPlayers()
     {
@@ -133,6 +157,9 @@ public class GameController
 
         GetPlayerInfo(player);
 
+
+
+
         // Gulirkan dadu
         _dice.RollTwoDice(out int firstRoll, out int secondRoll, out int totalRoll);
         OnDisplayMessage?.Invoke($"Player {player.Name} melempar dadu: {firstRoll} dan {secondRoll}, total: {totalRoll}");
@@ -142,6 +169,8 @@ public class GameController
         PlayerData data = GetPlayerData(player);
         ISquare currentSquare = data.playerPosition;
         OnDisplayMessage?.Invoke($"\nPosisi {player.Name} sekarang di {currentSquare.Name} ({currentSquare.GetType().Name})");
+
+        GetPropertyInfo(player);
 
         if (currentSquare is Property property)
     {
@@ -153,8 +182,7 @@ public class GameController
             {
                 if (data.balance >= property.Price)
                 {
-                    data.DeductBalance(property.Price);
-                    property.SetOwner(player); // Gunakan metode SetOwner
+                    property.BuyProperty(player, this);
                     OnDisplayMessage?.Invoke($"Player {player.Name} membeli {property.Name}.");
                 }
                 else
@@ -168,15 +196,25 @@ public class GameController
         {
             if (property.Owner != player)
             {
-                int rent = property.CalculateRent();
-                data.DeductBalance(rent);
-                GetPlayerData(property.Owner).AddBalance(rent);
-                OnDisplayMessage?.Invoke($"Player {player.Name} membayar sewa {rent} kepada {property.Owner.Name}.");
+                property.PayRent(player, this);
+                GetPlayerData(property.Owner).AddBalance(property.RentPrice);
+                OnDisplayMessage?.Invoke($"Player {player.Name} membayar sewa {property.RentPrice} kepada {property.Owner.Name}.");
             }
         }
         
     }
-        NextTurnPlayer(player);
+        else
+        {
+            // Panggil EffectSquare jika bukan Property
+            currentSquare.EffectSquare(player, this);
+        }
+
+        if(!(IsBankrupt(player) == true)){
+            NextTurnPlayer(player);
+        }
+        OnDisplayMessage?.Invoke($"{player.Name}, Anda telah bankrupt dan tidak dapat melanjutkan permainan");
+        Finish();
+        GetWinner(player);
     }
     public void NextTurnPlayer(IPlayer player){
 
@@ -207,6 +245,11 @@ public class GameController
     public int GetPlayerPosition(PlayerData data)
     {
         return _board.SquareBoard.IndexOf(data.playerPosition);
+    }
+    public void GetWinner(IPlayer player){
+        if(!IsBankrupt(player)){
+            OnDisplayMessage?.Invoke($"Pemenang dalam permainan kali ini adalah {player.Name}");
+        }
     }
 }
 

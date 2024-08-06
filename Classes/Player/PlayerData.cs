@@ -5,7 +5,7 @@ public class PlayerData : IPlayer
     public int Id { get; private set; }
     public string Name { get; private set; }
     public PlayerPieces Piece;
-    public int balance = 2000;
+    public int balance = 500;
     public List<Property> PropertyPlayer{ get; set; }
     public List<ICard> CardChanceSave;
     public ISquare playerPosition;
