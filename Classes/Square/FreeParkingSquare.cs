@@ -1,14 +1,14 @@
 namespace MonopolyGame;
 
-public class FreeParkingSquare : SpecialSquare
+public class FreeParkingSquare : SpecialSquare, ISquare
 {
-    public string Name { get; private set; }
+	public string Description { get; private set; }
 
-    public FreeParkingSquare(int id, string name) : base(id, name)
-    {
-    }
-    public override bool EffectSquare(IPlayer player, GameController game)
-    {
-        return true;
-    }
+	public FreeParkingSquare(int id, string name) : base(id, name)
+	{
+	}
+	public bool EffectSquare(IPlayer player, GameController game)
+	{
+		return true;
+	}
 }

@@ -7,4 +7,5 @@ public interface ICard
     // public TypeCard typeCard { get; }
 
     public bool ActionCard(IPlayer player, GameController game);
+    
 }

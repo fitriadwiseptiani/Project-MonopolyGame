@@ -1,14 +1,17 @@
-// namespace MonopolyGame.Classes.Card.CommunityCard.ActionCard;
+namespace MonopolyGame;
 
-// public class HolidayFundMatures : ICardCommunity
-// {
-//     public int Id { get; }
-//     public string Description { get; }
-//     public TypeCard typeCard { get; }
-
-//     public bool ActionCard(IPlayer player, GameController game)
-//     {
-//         game.GetPlayerData(player).AddBalance(100);
-//         return true;
-//     }
-// }
+public class HolidayFundMatures : CardCommunity
+{
+    public int Id { get; }
+    public string Description { get; }
+    public HolidayFundMatures(int id, string description)
+    {
+    	Id = id;
+		Description = description;
+    }
+    public bool ActionCard(IPlayer player, GameController game)
+    {
+        game.GetPlayerData(player).AddBalance(100);
+        return true;
+    }
+}

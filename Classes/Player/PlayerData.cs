@@ -5,12 +5,12 @@ public class PlayerData : IPlayer
     public int Id { get; private set; }
     public string Name { get; private set; }
     public PlayerPieces Piece;
-    public int balance = 500;
+    public int balance = 1000;
     public List<Property> PropertyPlayer{ get; set; }
     public List<ICard> CardChanceSave;
     public ISquare playerPosition;
     private IPlayer newPlayer;
-    private int v;
+    private int amount;
     private IPlayer player;
 
     public PlayerData(int id, PlayerPieces piece, int money, string name)
@@ -23,10 +23,10 @@ public class PlayerData : IPlayer
         Name = name;
     }
 
-    public PlayerData(IPlayer newPlayer, int v)
+    public PlayerData(IPlayer newPlayer, int amount)
     {
         this.newPlayer = newPlayer;
-        this.v = v;
+        this.amount = amount;
     }
 
     public PlayerData(IPlayer player)
@@ -34,17 +34,15 @@ public class PlayerData : IPlayer
         this.player = player;
     }
 
-    // public bool HaveAdvanceToGoCard()
-    // {
-    //     // untuk mengetahuinya dari riwayat mendapatkan cardchance
-    //     // periksa apakah pemain memiliki kartu "advance to go"
-    //     return CardChanceSave.OfType<AdvanceToGo>().Any();
-    // }
-    // public bool HaveJailFreeCard()
-    // {
-    //     return CardChanceSave.OfType<GetOutOfJailFree>().Any();
-    // }
-
+    public bool HaveAdvanceToGoCard()
+    {
+        // untuk mengetahuinya dari riwayat mendapatkan cardchance
+        return CardChanceSave.OfType<AdvanceToGo>().Any();
+    }
+    public bool HaveJailFreeCard()
+    {
+        return CardChanceSave.OfType<GetOutOfJailFree>().Any();
+    }
 
     public void AddBalance(int cash)
     {

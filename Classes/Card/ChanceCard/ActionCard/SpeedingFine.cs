@@ -1,14 +1,17 @@
-// namespace MonopolyGame.Classes.Card.ChanceCard.ActionCard;
+namespace MonopolyGame;
 
-// public class SpeedingFine
-// {
-//     public int Id { get; }
-//     public string Description { get; }
-//     // public TypeCard typeCard { get; }
-
-//     public bool ActionCard(IPlayer player, GameController game)
-//     {
-//         game.GetPlayerData(player).DeductBalance(15);
-//         return true;
-//     }
-// }
+public class SpeedingFine : CardChance
+{
+    public int Id { get; }
+    public string Description { get; }
+    public SpeedingFine(int id, string description)
+    {
+    	Id = id;
+		Description = description;
+    }
+    public bool ActionCard(IPlayer player, GameController game)
+    {
+        game.GetPlayerData(player).DeductBalance(15);
+        return true;
+    }
+}

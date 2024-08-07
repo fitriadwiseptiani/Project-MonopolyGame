@@ -9,11 +9,9 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine("########################################################################################");
-        Console.WriteLine("|											|");
-        Console.WriteLine("|					Monopoly Game					|");
-        Console.WriteLine("|											|");
-        Console.WriteLine("########################################################################################");
+        Console.WriteLine("\n");
+        Console.WriteLine("\nMonopoly Game\n");
+        Console.WriteLine("\n");
 
         // Inisialisasi objek dice
         IDice dice = new Dice(new int[] { 1, 2, 3, 4, 5, 6 });
@@ -21,7 +19,6 @@ class Program
         // Inisialisasi board dan game controller
         Board board = new Board(40);
         GameController gameController = new GameController(board, dice);
-        // Menyambungkan event OnDisplayMessage
         gameController.OnDisplayMessage += DisplayMessage;
         // Membaca data JSON dan mengisi board
         board.InitializeBoard();
@@ -61,7 +58,7 @@ class Program
                     IPlayer newPlayer = new Player(playerIdCounter, input);
                     PlayerData playerData = new PlayerData(newPlayer, 0);
                     gameController.AddPlayer(newPlayer, playerData);
-                    Console.WriteLine($"{input} baru saja bergabung pada permainan dan mendapatkan $2000.");
+                    Console.WriteLine($"{input} telah bergabung pada permainan.");
 
                     playerIdCounter++;
                 }
@@ -69,15 +66,10 @@ class Program
 
         }
 
-        // Proceed with the game loop or other game logic here
     }
-
     private static void DisplayMessage(string message)
     {
         Console.WriteLine(message);
     }
 
-    static void GetPlayerInfo(IPlayer player){
-        PlayerData playerInfo = new (player);
-    }
 }

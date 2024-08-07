@@ -13,3 +13,18 @@ D:\Formulatrix\Project\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.p
 d:\Formulatrix\Project\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.genruntimeconfig.cache
 d:\Formulatrix\Project\MonopolyGame\MonopolyGame\obj\Debug\net8.0\ref\MonopolyGame.dll
 d:\Formulatrix\Project\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.sourcelink.json
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\bin\Debug\net8.0\MonopolyGame.exe
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\bin\Debug\net8.0\MonopolyGame.deps.json
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\bin\Debug\net8.0\MonopolyGame.runtimeconfig.json
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\bin\Debug\net8.0\MonopolyGame.dll
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\bin\Debug\net8.0\MonopolyGame.pdb
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.AssemblyInfoInputs.cache
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.AssemblyInfo.cs
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.csproj.CoreCompileInputs.cache
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.sourcelink.json
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.dll
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\refint\MonopolyGame.dll
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.pdb
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\MonopolyGame.genruntimeconfig.cache
+C:\Users\Batch 11\Desktop\MonopolyGame\MonopolyGame\obj\Debug\net8.0\ref\MonopolyGame.dll

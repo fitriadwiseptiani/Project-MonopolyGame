@@ -1,13 +1,13 @@
 namespace MonopolyGame;
 
-public class GoToJailSquare : SpecialSquare
+public class GoToJailSquare : SpecialSquare, ISquare
 {
-    public GoToJailSquare(int id, string name) : base(id, name) { }
+	public string Description { get; private set; }
+	public GoToJailSquare(int id, string name) : base(id, name) { }
 
-    public override bool EffectSquare(IPlayer player, GameController game)
-    {
-        // Player goes to jail
-        game.HandleGoToJail(player);
-        return true;
-    }
+	public bool EffectSquare(IPlayer player, GameController game)
+	{
+		game.HandleGoToJail(player);
+		return true;
+	}
 }

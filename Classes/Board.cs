@@ -54,17 +54,17 @@ public class Board : IBoard
         }
 
         SquareBoard.Add(new GoSquare(1, "Go"));
-        SquareBoard.Add(new LuxuryTaxSquare(4, "Luxury Tax"));
-        SquareBoard.Add(new JailSquare(10, "Jail"));
-        SquareBoard.Add(new IncomeTaxSquare(20, "Income Tax"));
-        SquareBoard.Add(new GoToJailSquare(30, "Go to Jail"));
+        SquareBoard.Add(new LuxuryTaxSquare(5, "Luxury Tax"));
+        SquareBoard.Add(new JailSquare(11, "Jail"));
+        SquareBoard.Add(new IncomeTaxSquare(21, "Income Tax"));
+        SquareBoard.Add(new GoToJailSquare(31, "Go to Jail"));
         SquareBoard.Add(new FreeParkingSquare(21, "Free Parking"));
-        SquareBoard.Add(new CardCommunitySquare(2, "Community Chest"));
-        SquareBoard.Add(new CardCommunitySquare(17, "Community Chest"));
-        SquareBoard.Add(new CardCommunitySquare(33, "Community Chest"));
-        SquareBoard.Add(new CardChanceSquare(7, "Chance"));
-        SquareBoard.Add(new CardChanceSquare(22, "Chance"));
-        SquareBoard.Add(new CardChanceSquare(36, "Chance"));
+        SquareBoard.Add(new CardCommunitySquare(3, "Community Chest"));
+        SquareBoard.Add(new CardCommunitySquare(18, "Community Chest"));
+        SquareBoard.Add(new CardCommunitySquare(34, "Community Chest"));
+        SquareBoard.Add(new CardChanceSquare(8, "Chance"));
+        SquareBoard.Add(new CardChanceSquare(23, "Chance"));
+        SquareBoard.Add(new CardChanceSquare(37, "Chance"));
 
         SquareBoard = SquareBoard.OrderBy(square => square.Id).ToList();
     }

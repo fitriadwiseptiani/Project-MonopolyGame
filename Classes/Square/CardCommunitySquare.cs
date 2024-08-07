@@ -1,22 +1,22 @@
 namespace MonopolyGame;
 
-public class CardCommunitySquare : SpecialSquare
+public class CardCommunitySquare : SpecialSquare, ISquare
 {
-    public string Name { get; private set; }
+	public string Description { get; private set; }
 
-    public CardCommunitySquare(int id, string name) : base(id, name)
-    {
-    }
-    public override bool EffectSquare(IPlayer player, GameController game)
-    {
-        ICard card = game.DrawCardCommunity();
-        if (card == null)
-        {
-            return false;
-        }
+	public CardCommunitySquare(int id, string name) : base(id, name)
+	{
+	}
+	public bool EffectSquare(IPlayer player, GameController game)
+	{
+		ICard card = game.DrawCardCommunity();
+		if (card == null)
+		{
+			return false;
+		}
 
-        // Terapkan efek kartu
-        card.ActionCard(player, game);
-        return true;
-    }
+		// Terapkan efek kartu
+		card.ActionCard(player, game);
+		return true;
+	}
 }
