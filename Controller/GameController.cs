@@ -1,5 +1,3 @@
-// 
-
 using System.ComponentModel;
 
 namespace MonopolyGame;
@@ -95,7 +93,8 @@ public class GameController
         OnDisplayMessage?.Invoke(playerInfo);
     }
 
-    public void GetPropertyInfo(IPlayer player){
+    public void GetPropertyInfo(IPlayer player)
+    {
         if (player == null)
         {
             OnDisplayMessage?.Invoke("Pemain tidak valid.");
@@ -110,11 +109,13 @@ public class GameController
         PlayerData data = GetPlayerData(player);
         ISquare currentSquare = data.playerPosition;
 
-        if(currentSquare is Property property){
+        if (currentSquare is Property property)
+        {
             string propertyInfo = $"\nId: {property.Id}, \nNama: {property.Name}, \nHarga: ${property.Price}, \nPemilik: {property.Owner?.Name ?? "Belum Dimiliki"}";
             OnDisplayMessage?.Invoke($"Informasi Properti di Posisi Saat Ini:\n{propertyInfo}");
         }
-        else{
+        else
+        {
             OnDisplayMessage?.Invoke("Posisi ini bukanlah properti");
         }
     }
@@ -185,36 +186,36 @@ public class GameController
         OnDisplayMessage?.Invoke($"\n##############################################");
 
         if (currentSquare is Property property)
-    {
-        if (property.Owner == null)
         {
-            OnDisplayMessage?.Invoke($"\nApakah Player {player.Name} ingin membeli {property.Name} seharga {property.Price}? (Y/N)");
-            string input = Console.ReadLine();
-            if (input?.Trim().ToUpper() == "Y")
+            if (property.Owner == null)
             {
-                if (data.balance >= property.Price)
+                OnDisplayMessage?.Invoke($"\nApakah Player {player.Name} ingin membeli {property.Name} seharga {property.Price}? (Y/N)");
+                string input = Console.ReadLine();
+                if (input?.Trim().ToUpper() == "Y")
                 {
-                    property.BuyProperty(player, this);
-                    OnDisplayMessage?.Invoke($"Player {player.Name} membeli {property.Name}.");
+                    if (data.balance >= property.Price)
+                    {
+                        property.BuyProperty(player, this);
+                        OnDisplayMessage?.Invoke($"Player {player.Name} membeli {property.Name}.");
+                    }
+                    else
+                    {
+                        OnDisplayMessage?.Invoke($"Player {player.Name} tidak memiliki cukup uang untuk membeli {property.Name}.");
+                    }
                 }
-                else
+
+            }
+            else
+            {
+                if (property.Owner != player)
                 {
-                    OnDisplayMessage?.Invoke($"Player {player.Name} tidak memiliki cukup uang untuk membeli {property.Name}.");
+                    property.PayRent(player, this);
+                    GetPlayerData(property.Owner).AddBalance(property.RentPrice);
+                    OnDisplayMessage?.Invoke($"Player {player.Name} membayar sewa {property.RentPrice} kepada {property.Owner.Name}.");
                 }
             }
 
         }
-        else
-        {
-            if (property.Owner != player)
-            {
-                property.PayRent(player, this);
-                GetPlayerData(property.Owner).AddBalance(property.RentPrice);
-                OnDisplayMessage?.Invoke($"Player {player.Name} membayar sewa {property.RentPrice} kepada {property.Owner.Name}.");
-            }
-        }
-        
-    }
         else
         {
             // Panggil EffectSquare jika bukan Property
@@ -238,7 +239,8 @@ public class GameController
         // Finish();
         // GetWinner(player);
     }
-    public void NextTurnPlayer(IPlayer player){
+    public void NextTurnPlayer(IPlayer player)
+    {
 
         // // Pastikan pemain saat ini telah selesai bermain
         // if (!_playerTurn.ContainsKey(player) || !_playerTurn[player])
@@ -270,7 +272,7 @@ public class GameController
         int currentIndex = GetPlayerPosition(data);
         int newIndex = (currentIndex + diceRoll) % _board.SquareBoard.Count;
         // Cek jika pemain melewati GoSquare
-        
+
         data.playerPosition = _board.SquareBoard[newIndex];
         // if (newIndex < currentIndex || _board.SquareBoard[newIndex] is GoSquare)
         // {
@@ -294,7 +296,8 @@ public class GameController
         // Perbarui posisi pemain
         data.playerPosition = targetSquare;
     }
-    public void HandleGoToJail(IPlayer player){
+    public void HandleGoToJail(IPlayer player)
+    {
         PlayerData data = GetPlayerData(player);
         var positionPlayer = _board.SquareBoard[10];
         data.playerPosition = positionPlayer;
@@ -332,7 +335,8 @@ public class GameController
         CommunityCards.RemoveAt(index);
         return card;
     }
-    public void GetWinner(){
+    public void GetWinner()
+    {
         var winner = players.FirstOrDefault(p => !IsBankrupt(p));
         if (winner != null)
         {
