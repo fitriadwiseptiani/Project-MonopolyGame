@@ -1,12 +1,10 @@
 namespace MonopolyGame;
 
-public class FreeParkingSquare : SpecialSquare, ISquare
+public class FreeParkingSquare : SpecialSquare
 {
-	public string Description { get; private set; }
-
-	public FreeParkingSquare(int id, string name) : base(id, name)
-	{
-	}
+	public FreeParkingSquare(int id, string name, string description) : base(id, name, description)
+    {
+    }
 	public bool EffectSquare(IPlayer player, GameController game)
 	{
 		return true;

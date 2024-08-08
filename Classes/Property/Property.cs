@@ -29,7 +29,8 @@ public class Property : ISquare
 	public void PayRent(IPlayer player, GameController game)
 	{
 		PlayerData playerData = game.GetPlayerData(player);
-		if(!(Owner == player)){
+		if (!(Owner == player))
+		{
 			playerData.DeductBalance(RentPrice);
 		}
 		else
@@ -40,6 +41,7 @@ public class Property : ISquare
 
 	public void BuyProperty(IPlayer player, GameController game)
 	{
+		IPlayer players = game.GetCurrentPlayer();
 		PlayerData data = game.GetPlayerData(player);
 		if (Owner == null)
 		{
@@ -47,7 +49,7 @@ public class Property : ISquare
 		}
 		else
 		{
-			throw new InvalidOperationException($"Properti sudah dimiliki oleh {data.Name}");
+			throw new InvalidOperationException($"Properti sudah dimiliki oleh {players.Name}");
 		}
 
 		SetOwner(player);

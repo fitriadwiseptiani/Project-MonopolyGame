@@ -1,12 +1,10 @@
 namespace MonopolyGame;
 
-public class GoSquare : SpecialSquare, ISquare
+public class GoSquare : SpecialSquare
 {
-	public string Description { get; private set; }
-
-	public GoSquare(int id, string name) : base(id, name)
-	{
-	}
+	public GoSquare(int id, string name, string description) : base(id, name, description)
+    {
+    }
 	public bool EffectSquare(IPlayer player, GameController game)
 	{
 		// mengambil data pada player data dan menambahkan balance sebesar 200 bila melewati GO

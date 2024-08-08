@@ -2,8 +2,7 @@ namespace MonopolyGame;
 
 public class GoToJailSquare : SpecialSquare, ISquare
 {
-	public string Description { get; private set; }
-	public GoToJailSquare(int id, string name) : base(id, name) { }
+	public GoToJailSquare(int id, string name, string description) : base(id, name, description) { }
 
 	public bool EffectSquare(IPlayer player, GameController game)
 	{

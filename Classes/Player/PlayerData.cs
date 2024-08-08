@@ -1,67 +1,42 @@
 namespace MonopolyGame;
 
-public class PlayerData : IPlayer
+public class PlayerData
 {
-    public int Id { get; private set; }
-    public string Name { get; private set; }
     public PlayerPieces Piece;
-    public int balance = 1000;
-    public List<Property> PropertyPlayer{ get; set; }
-    public List<ICard> CardChanceSave;
+    public int Balance;
+    public List<Property> propertyPlayer { get; set; }
+    public List<ICard> cardChanceSave;
     public ISquare playerPosition;
-    private IPlayer newPlayer;
-    private int amount;
-    private IPlayer player;
 
-    public PlayerData(int id, PlayerPieces piece, int money, string name)
-    {
-        Id = id;
-        Piece = piece;
-        balance = money;
-        PropertyPlayer = new List<Property>();
-        CardChanceSave = new List<ICard>();
-        Name = name;
+    public PlayerData(PlayerPieces playerPieces, int balance){
+        Piece = playerPieces;
+        Balance = balance;
+        propertyPlayer = new List<Property>();
+        cardChanceSave = new List<ICard>();
     }
-
-    public PlayerData(IPlayer newPlayer, int amount)
-    {
-        this.newPlayer = newPlayer;
-        this.amount = amount;
-    }
-
-    public PlayerData(IPlayer player)
-    {
-        this.player = player;
-    }
-
     public bool HaveAdvanceToGoCard()
     {
         // untuk mengetahuinya dari riwayat mendapatkan cardchance
-        return CardChanceSave.OfType<AdvanceToGo>().Any();
+        return cardChanceSave.OfType<AdvanceToGo>().Any();
     }
     public bool HaveJailFreeCard()
     {
-        return CardChanceSave.OfType<GetOutOfJailFree>().Any();
+        return cardChanceSave.OfType<GetOutOfJailFree>().Any();
     }
-
-    public void AddBalance(int cash)
-    {
-        balance += cash;
+    public void AddBalance(int cash){
+        Balance += cash;
     }
-    public void DeductBalance(int cash)
-    {
-        balance -= cash;
+    public void DeductBalance(int cash){
+        Balance -= cash;
     }
-    public int GetBalance(IPlayer player)
-    {
-        return balance;
+    public int GetBalance(){
+        return Balance;
     }
-    public void SetPosition(ISquare newPosition)
-    {
+    public void SetPosition(ISquare newPosition){
         playerPosition = newPosition;
     }
-    public List<Property> GetPropertiesPlayer(IPlayer player)
-    {
-        return PropertyPlayer;
+    public List<Property> GetPropertiesPlayer(){
+        return propertyPlayer;
     }
+
 }

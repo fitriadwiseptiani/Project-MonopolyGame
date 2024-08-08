@@ -1,5 +1,8 @@
-namespace MonopolyGame;
+using System.Collections.Generic;
 using System.Text.Json;
+
+namespace MonopolyGame;
+
 public class Board : IBoard
 {
     public int NumberOfSquare { get; private set; }
@@ -53,18 +56,18 @@ public class Board : IBoard
             SquareBoard.Add(utility);
         }
 
-        SquareBoard.Add(new GoSquare(1, "Go"));
-        SquareBoard.Add(new LuxuryTaxSquare(5, "Luxury Tax"));
-        SquareBoard.Add(new JailSquare(11, "Jail"));
-        SquareBoard.Add(new IncomeTaxSquare(21, "Income Tax"));
-        SquareBoard.Add(new GoToJailSquare(31, "Go to Jail"));
-        SquareBoard.Add(new FreeParkingSquare(21, "Free Parking"));
-        SquareBoard.Add(new CardCommunitySquare(3, "Community Chest"));
-        SquareBoard.Add(new CardCommunitySquare(18, "Community Chest"));
-        SquareBoard.Add(new CardCommunitySquare(34, "Community Chest"));
-        SquareBoard.Add(new CardChanceSquare(8, "Chance"));
-        SquareBoard.Add(new CardChanceSquare(23, "Chance"));
-        SquareBoard.Add(new CardChanceSquare(37, "Chance"));
+        SquareBoard.Add(new GoSquare(1, "Go Square", "Go"));
+        SquareBoard.Add(new LuxuryTaxSquare(5, "Luxury Tax Square", "Luxury Tax"));
+        SquareBoard.Add(new JailSquare(11, "Jail Square", "Jail"));
+        SquareBoard.Add(new IncomeTaxSquare(21, "Income Tax Square", "Income Tax"));
+        SquareBoard.Add(new GoToJailSquare(31, "GoToJailSquare", "Go to Jail"));
+        SquareBoard.Add(new FreeParkingSquare(21, "Go To Jail Square", "Free Parking"));
+        SquareBoard.Add(new CardCommunitySquare(3, "Card Community Square", "Community Chest"));
+        SquareBoard.Add(new CardCommunitySquare(18, "Card Community Square", "Community Chest"));
+        SquareBoard.Add(new CardCommunitySquare(34, "Card Community Square","Community Chest"));
+        SquareBoard.Add(new CardChanceSquare(8, "Card Chance Square", "Chance"));
+        SquareBoard.Add(new CardChanceSquare(23, "Card Chance Square", "Chance"));
+        SquareBoard.Add(new CardChanceSquare(37, "Card Chance Square", "Chance"));
 
         SquareBoard = SquareBoard.OrderBy(square => square.Id).ToList();
     }
@@ -72,12 +75,5 @@ public class Board : IBoard
     {
         // Mendapatkan square pertama sebagai Go Square
         return SquareBoard.FirstOrDefault(square => square is GoSquare);
-    }
-    public void DisplayBoard()
-    {
-        foreach (var square in SquareBoard)
-        {
-            Console.WriteLine($"ID: {square.Id}, Name: {square.Name}");
-        }
     }
 }

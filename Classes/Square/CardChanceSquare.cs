@@ -2,8 +2,7 @@ namespace MonopolyGame;
 
 public class CardChanceSquare : SpecialSquare, ISquare
 {
-	public string Description { get; private set; }
-	public CardChanceSquare(int id, string name) : base(id, name)
+	public CardChanceSquare(int id, string name, string description) : base(id, name, description)
 	{
 	}
 	public bool EffectSquare(IPlayer player, GameController game)

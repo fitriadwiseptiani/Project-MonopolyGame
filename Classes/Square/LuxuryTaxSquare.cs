@@ -3,10 +3,9 @@ namespace MonopolyGame;
 public class LuxuryTaxSquare : SpecialSquare, ISquare
 {
 
-	public string Description { get; private set; }
-	public LuxuryTaxSquare(int id, string name) : base(id, name)
-	{
-	}
+	public LuxuryTaxSquare(int id, string name, string description) : base(id, name, description)
+    {
+    }
 	public bool EffectSquare(IPlayer player, GameController game)
 	{
 		// nilai untuk luxurytax = 75
