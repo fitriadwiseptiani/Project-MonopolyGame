@@ -158,45 +158,44 @@ class Program
 	}
 
 	public static void BuyPropertyPlayer(IPlayer player)
-	{
-		PlayerData data = GetPlayerData(player);
-		ISquare currentSquare = data.playerPosition;
-		if (currentSquare is Property property)
-		{
-			if (property.Owner == null)
-			{
-				Console.WriteLine($"\nApakah Player {player.Name} ingin membeli {property.Name} seharga {property.Price}? (Y/N)");
-				string input = Console.ReadLine();
-				if (input?.Trim().ToUpper() == "Y")
-				{
-					if (data.Balance >= property.Price)
-					{
-						property.BuyProperty(player, game);
-						Console.WriteLine($"Player {player.Name} membeli {property.Name}.");
-					}
-					else
-					{
-						Console.WriteLine($"Player {player.Name} tidak memiliki cukup uang untuk membeli {property.Name}.");
-					}
-				}
+{
+    PlayerData data = GetPlayerData(player);
+    ISquare currentSquare = data.playerPosition;
+    if (currentSquare is Property property)
+    {
+        if (property.Owner == null)
+        {
+            Console.WriteLine($"\nApakah Player {player.Name} ingin membeli {property.Name} seharga {property.Price}? (Y/N)");
+            string input = Console.ReadLine();
+            if (input?.Trim().ToUpper() == "Y")
+            {
+                if (data.Balance >= property.Price)
+                {
+                    property.BuyProperty(player, game);
+                    Console.WriteLine($"Player {player.Name} membeli {property.Name}.");
+                }
+                else
+                {
+                    Console.WriteLine($"Player {player.Name} tidak memiliki cukup uang untuk membeli {property.Name}.");
+                }
+            }
+        }
+        else
+        {
+            if (property.Owner != player)
+            {
+                property.PayRent(player, game);
+                GetPlayerData(property.Owner).AddBalance(property.RentPrice);
+                Console.WriteLine($"Player {player.Name} membayar sewa {property.RentPrice} kepada {property.Owner.Name}.");
+            }
+        }
+    }
+    else
+    {
+        currentSquare.EffectSquare(player, game);
+    }
+}
 
-			}
-			else
-			{
-				if (property.Owner != player)
-				{
-					property.PayRent(player, game);
-					GetPlayerData(property.Owner).AddBalance(property.RentPrice);
-					Console.WriteLine($"Player {player.Name} membayar sewa {property.RentPrice} kepada {property.Owner.Name}.");
-				}
-			}
-
-		}
-		else
-		{
-			currentSquare.EffectSquare(player, game);
-		}
-	}
 
 	private static void ChanceCardAll()
 	{
