@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Batch 11\\Desktop\\MonopolyGame\\MonopolyGame\\MonopolyGame.csproj": {}
+    "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Batch 11\\Desktop\\MonopolyGame\\MonopolyGame\\MonopolyGame.csproj": {
+    "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Batch 11\\Desktop\\MonopolyGame\\MonopolyGame\\MonopolyGame.csproj",
+        "projectUniqueName": "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj",
         "projectName": "MonopolyGame",
-        "projectPath": "C:\\Users\\Batch 11\\Desktop\\MonopolyGame\\MonopolyGame\\MonopolyGame.csproj",
-        "packagesPath": "C:\\Users\\Batch 11\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Batch 11\\Desktop\\MonopolyGame\\MonopolyGame\\obj\\",
+        "projectPath": "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj",
+        "packagesPath": "C:\\Users\\Zeleama\\.nuget\\packages\\",
+        "outputPath": "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Batch 11\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Zeleama\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

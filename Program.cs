@@ -1,5 +1,6 @@
 ﻿using MonopolyGame;
 using System.Collections.Generic;
+using System.Text.Json;
 
 class Program
 {
@@ -14,7 +15,7 @@ class Program
 		IDice dice = new Dice(new int[] { 1, 2, 3, 4, 5, 6 });
 		game = new GameController(maxPlayer, board, dice);
 
-		board.InitializeBoard();
+		InitializeBoard();
 		ChanceCardAll();
 		CommunityCardAll();
 
@@ -86,7 +87,72 @@ class Program
 			}
 		}
 	}
+	public static void InitializeBoard()
+	{
+		IBoard board = game.GetBoard();
+		string result;
 
+		using (StreamReader sr = new("JSON/City.json"))
+		{
+			result = sr.ReadToEnd();
+		}
+		List<City> cityMonopoly = JsonSerializer.Deserialize<List<City>>(result);
+
+		string result2;
+
+		using (StreamReader sr = new("JSON/Utilities.json"))
+		{
+			result2 = sr.ReadToEnd();
+		}
+		List<Utilities> utilitiesMonopoly = JsonSerializer.Deserialize<List<Utilities>>(result2);
+
+		string result3;
+
+		using (StreamReader sr = new("JSON/Railroads.json"))
+		{
+			result3 = sr.ReadToEnd();
+		}
+		List<Railroads> railroadsMonopoly = JsonSerializer.Deserialize<List<Railroads>>(result3);
+		// city
+		foreach (var city in cityMonopoly)
+		{
+			board.SquareBoard.Add(city);
+		}
+
+		// railroads
+		foreach (var railroad in railroadsMonopoly)
+		{
+			board.SquareBoard.Add(railroad);
+		}
+
+		// Add
+		foreach (var utility in utilitiesMonopoly)
+		{
+			board.SquareBoard.Add(utility);
+		}
+
+		board.SquareBoard.Add(new GoSquare(1, "Go Square", "Go"));
+		board.SquareBoard.Add(new LuxuryTaxSquare(5, "Luxury Tax Square", "Luxury Tax"));
+		board.SquareBoard.Add(new JailSquare(11, "Jail Square", "Jail"));
+		board.SquareBoard.Add(new IncomeTaxSquare(21, "Income Tax Square", "Income Tax"));
+		board.SquareBoard.Add(new GoToJailSquare(31, "GoToJailSquare", "Go to Jail"));
+		board.SquareBoard.Add(new FreeParkingSquare(21, "Go To Jail Square", "Free Parking"));
+		board.SquareBoard.Add(new CardCommunitySquare(3, "Card Community Square", "Community Chest"));
+		board.SquareBoard.Add(new CardCommunitySquare(18, "Card Community Square", "Community Chest"));
+		board.SquareBoard.Add(new CardCommunitySquare(34, "Card Community Square", "Community Chest"));
+		board.SquareBoard.Add(new CardChanceSquare(8, "Card Chance Square", "Chance"));
+		board.SquareBoard.Add(new CardChanceSquare(23, "Card Chance Square", "Chance"));
+		board.SquareBoard.Add(new CardChanceSquare(37, "Card Chance Square", "Chance"));
+
+		var sortedSquares = board.SquareBoard.OrderBy(square => square.Id).ToList();
+
+		board.SquareBoard.Clear();
+		foreach (var square in sortedSquares)
+		{
+			board.SquareBoard.Add(square);
+		}
+
+	}
 	private static void DisplayBoard()
 	{
 		IBoard board = game.GetBoard();
