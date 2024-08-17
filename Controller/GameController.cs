@@ -35,7 +35,7 @@ public class GameController
 	{
 		try
 		{
-			if (_players.Count < _maxPlayer) // Change <= to < to ensure max player limit
+			if (_players.Count <= _maxPlayer) // Change <= to < to ensure max player limit
 			{
 				SetStartPlayerPosition(_board, playerData);
 				_players[player] = playerData;
@@ -56,7 +56,7 @@ public class GameController
 	}
 	public bool Start()
 	{
-		if (!(_players.Count == 2))
+		if (_players.Count == 2 || _players.Count <= _maxPlayer)
 		{
 			_gameStatus = GameStatus.Play;
 			return true;
@@ -71,9 +71,52 @@ public class GameController
 	{
 		return _players.Keys.ToList();
 	}
-	public PlayerData GetPlayerData(IPlayer player)
-	{
-		return _players[player];
+	public int GetPlayerId(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return player.Id;
+		}
+		throw new Exception();
+	}
+	public string GetPlayerName(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return player.Name;
+		}
+		throw new Exception();
+	}
+	public PlayerPieces GetPlayerPiece(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return _players[player].Piece;
+		}
+		throw new Exception();
+	}
+	public int GetPlayerBalance(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return _players[player].Balance;
+		}
+		throw new Exception();
+	}
+	public List<Property> GetPlayerProperty(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return _players[player].propertyPlayer;
+		}
+		throw new Exception();
+	}
+	public List<ICard> GetPlayerCardSave(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return _players[player].cardSpesialSave;
+		}
+		throw new Exception();
+	}
+	// public PlayerData GetPlayerData(IPlayer player)
+	// {
+	// 	return _players[player];
+	// }
+	public ISquare GetPlayerPosition(IPlayer player){
+		if (_players.ContainsKey(player))
+		{
+			return _players[player].playerPosition;
+		}
+		throw new Exception();
 	}
 	public void SetTurnPlayer(IPlayer player)
 	{
