@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj": {}
+    "D:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj": {}
   },
   "projects": {
-    "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj": {
+    "D:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj",
+        "projectUniqueName": "D:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj",
         "projectName": "MonopolyGame",
-        "projectPath": "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj",
+        "projectPath": "D:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\MonopolyGame.csproj",
         "packagesPath": "C:\\Users\\Zeleama\\.nuget\\packages\\",
-        "outputPath": "d:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\obj\\",
+        "outputPath": "D:\\Formulatrix\\Project\\Project Individu\\Project-MonopolyGame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Zeleama\\AppData\\Roaming\\NuGet\\NuGet.Config"
