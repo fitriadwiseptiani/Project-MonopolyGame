@@ -11,7 +11,11 @@ public class GeneralRepairs : CardChance
 	}
 	public bool ActionCard(IPlayer player, GameController game)
 	{
-		game.GetPlayerData(player).DeductBalance(150);
-        return true;
+		int currentBalance = game.GetPlayerBalance(player);
+
+		int newBalance = currentBalance + 150;
+
+		game.UpdatePlayerBalance(player, newBalance);
+		return true;
 	}
 }

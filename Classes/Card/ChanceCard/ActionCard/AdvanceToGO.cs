@@ -13,7 +13,7 @@ public class AdvanceToGo : CardChance
 	{
 		var goSquare = game.GetBoard().SquareBoard.First(s => s is GoSquare); // Pindahkan pemain ke Go
 		game.MovePlayerToSquare(player, goSquare);
-		game.GetPlayerData(player).AddBalance(200);
+		// game.GetPlayerData(player).AddBalance(200);
 		return true;
 	}
 }

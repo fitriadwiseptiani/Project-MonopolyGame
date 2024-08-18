@@ -11,7 +11,11 @@ public class PayHospital : CardCommunity
     }
     public bool ActionCard(IPlayer player, GameController game)
     {
-        game.GetPlayerData(player).DeductBalance(100);
+        int currentBalance = game.GetPlayerBalance(player);
+
+        int newBalance = currentBalance - 100;
+
+        game.UpdatePlayerBalance(player, newBalance);
         return true;
     }
 }

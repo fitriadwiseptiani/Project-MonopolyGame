@@ -12,7 +12,11 @@ public class BankError : CardCommunity
 
 	public bool ActionCard(IPlayer player, GameController game)
 	{
-		game.GetPlayerData(player).AddBalance(200);
+		int currentBalance = game.GetPlayerBalance(player);
+
+		int newBalance = currentBalance + 200;
+
+		game.UpdatePlayerBalance(player, newBalance);
 		return true;
 	}
 }

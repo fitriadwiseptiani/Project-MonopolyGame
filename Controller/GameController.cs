@@ -107,10 +107,6 @@ public class GameController
 		}
 		throw new Exception();
 	}
-	// public PlayerData GetPlayerData(IPlayer player)
-	// {
-	// 	return _players[player];
-	// }
 	public ISquare GetPlayerPosition(IPlayer player){
 		if (_players.ContainsKey(player))
 		{
@@ -224,10 +220,21 @@ public class GameController
 		if (player == player)
 		{
 			var data = _players[player];
-			data.DeductBalance(15);
+			data.DeductBalance(amountOfMoney);
 			return true;
 		}
 		return false;
+	}
+	public void UpdatePlayerBalance(IPlayer player, int newBalance)
+	{
+		if (_players.ContainsKey(player))
+		{
+			_players[player].Balance = newBalance;
+		}
+		else
+		{
+			throw new Exception("Player tidak ditemukan.");
+		}
 	}
 	public bool CheckWinner()
 	{

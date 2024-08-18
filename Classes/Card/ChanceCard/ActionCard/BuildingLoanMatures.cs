@@ -11,7 +11,11 @@ public class BuildingLoanMatures : CardChance
     }
     public bool ActionCard(IPlayer player, GameController game)
     {
-        game.GetPlayerData(player).AddBalance(150);
+        int currentBalance = game.GetPlayerBalance(player);
+
+        int newBalance = currentBalance + 150;
+
+        game.UpdatePlayerBalance(player, newBalance);
         return true;
     }
 }

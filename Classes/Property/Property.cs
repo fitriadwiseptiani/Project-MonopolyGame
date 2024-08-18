@@ -28,10 +28,11 @@ public class Property : ISquare
 	}
 	public void PayRent(IPlayer player, GameController game)
 	{
-		PlayerData playerData = game.GetPlayerData(player);
+		int currentBalance = game.GetPlayerBalance(player);
 		if (!(Owner == player))
 		{
-			playerData.DeductBalance(RentPrice);
+			int newBalance = currentBalance - RentPrice;
+			game.UpdatePlayerBalance(player, newBalance);
 		}
 		else
 		{
@@ -42,10 +43,11 @@ public class Property : ISquare
 	public void BuyProperty(IPlayer player, GameController game)
 	{
 		IPlayer players = game.GetCurrentPlayer();
-		PlayerData data = game.GetPlayerData(player);
+		int currentBalance = game.GetPlayerBalance(player);
 		if (Owner == null)
 		{
-			data.DeductBalance(Price);
+			int newBalance = currentBalance - RentPrice;
+			game.UpdatePlayerBalance(player, newBalance);
 		}
 		else
 		{

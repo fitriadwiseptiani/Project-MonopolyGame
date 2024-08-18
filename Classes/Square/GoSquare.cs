@@ -8,8 +8,11 @@ public class GoSquare : SpecialSquare
 	public bool EffectSquare(IPlayer player, GameController game)
 	{
 		// mengambil data pada player data dan menambahkan balance sebesar 200 bila melewati GO
-		PlayerData playerData = game.GetPlayerData(player);
-		playerData.AddBalance(200);
+		int currentBalance = game.GetPlayerBalance(player);
+
+		int newBalance = currentBalance + 200;
+
+		game.UpdatePlayerBalance(player, newBalance);
 		return true;
 	}
 }
