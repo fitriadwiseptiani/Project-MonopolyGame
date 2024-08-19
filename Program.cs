@@ -33,23 +33,23 @@ class Program
 				}
 				Console.WriteLine("Permainan dimulai");
 				game.Start();
-				DisplayBoard();
+				DisplayBoard(board, game);
 
-				while (!game.CheckWinner())
-				{
-					IPlayer currentPlayer = game.GetCurrentPlayer();
-					Console.WriteLine($"Giliran {currentPlayer.Name}");
+				// while (!game.CheckWinner())
+				// {
+				// 	IPlayer currentPlayer = game.GetCurrentPlayer();
+				// 	Console.WriteLine($"Giliran {currentPlayer.Name}");
 
-					// Start turn for the current player
-					game.StartTurn();
-					game.SetTurnPlayer(currentPlayer);
-					GetPlayerInfo();
-					GetPropertiesInfo();
-					// BuyPropertyPlayer(currentPlayer);
-					game.EndTurn();
-					// Change player turn
-					game.ChangeTurnPlayer();
-				}
+				// 	// Start turn for the current player
+				// 	// game.StartTurn();
+				// 	// game.SetTurnPlayer(currentPlayer);
+				// 	// GetPlayerInfo();
+				// 	// GetPropertiesInfo();
+				// 	// BuyPropertyPlayer();
+				// 	// game.EndTurn();
+				// 	// // Change player turn
+				// 	// game.ChangeTurnPlayer();
+				// }
 
 				// Announce the winner
 				game.End();
@@ -153,24 +153,70 @@ class Program
 		}
 
 	}
-	private static void DisplayBoard()
+	static void DisplayBoard(IBoard board, GameController game)
 	{
-		IBoard board = game.GetBoard();
-		foreach (var square in board.SquareBoard)
-		{
-			Console.WriteLine($"ID: {square.Id}, Name: {square.Name}");
+		
+		for(int i = 20; i >= 10; i--){
+			var square = board.SquareBoard[i];
+			string playerPosition = GetPlayerMarker(game, i);
+			Console.Write($"[{(square.Id.ToString() + playerPosition).PadRight(10)}]");
+
+		}	
+		Console.WriteLine();
+
+		for (int i = 0; i < 9; i++){
+			var leftSquare = board.SquareBoard[30 +i];
+			var rightSquare = board.SquareBoard[20 - i];
+			string leftMarker = GetPlayerMarker(game, 30 + i);
+			string rightMarker = GetPlayerMarker(game, 20 - i);
+			
+			Console.Write($"[{(leftSquare.Id.ToString() + leftMarker).PadRight(10)}]");
+			for (int j = 0; j < 7; j++)
+			{
+				Console.Write(" ".PadRight(20));
+			}
+
+			Console.WriteLine($"[{(rightSquare.Id.ToString() + rightMarker).PadRight(10)}]");
+
 		}
+
+		for (int i = 0; i <= 9; i++)
+		{
+			var square = board.SquareBoard[i];
+			string playerMarker = GetPlayerMarker(game, i);
+			Console.Write($"[{(square.Id.ToString() + playerMarker).PadRight(10)}]");
+		}
+		Console.WriteLine();
+		// IBoard board = game.GetBoard();
+		// foreach (var square in board.SquareBoard)
+		// {
+		// 	Console.WriteLine($"ID: {square.Id}, Name: {square.Name}");
+		// }
+
+	}
+	static string GetPlayerMarker(GameController game, int positionIndex)
+	{
+		foreach(var player in game.GetPlayers()){
+			var position = game.GetPlayerPosition(player);
+			int playerIndex = game.GetBoard().SquareBoard.IndexOf(position);
+			if(playerIndex == positionIndex){
+				return $"({player.Name})";
+			}
+		}
+		return "";
 	}
 	public static void GetPlayerInfo()
 	{
 		IPlayer currentPlayer = game.GetCurrentPlayer();
 
-		if(currentPlayer == null){
+		if (currentPlayer == null)
+		{
 			Console.WriteLine("Tidak ada pemain saat ini");
 			return;
 		}
 
-		try {
+		try
+		{
 			int id = game.GetPlayerId(currentPlayer);
 			string name = game.GetPlayerName(currentPlayer);
 			PlayerPieces piece = game.GetPlayerPiece(currentPlayer);
@@ -191,21 +237,25 @@ class Program
 				Console.WriteLine($"- {property.Name}");
 			}
 			Console.WriteLine("Cards Owned: ");
-			foreach (ICard card in cardsSave){
+			foreach (ICard card in cardsSave)
+			{
 				Console.WriteLine($"- {card.Id}, {card.GetType().Name}, {card.Description}");
 			}
 
 			Console.WriteLine($"Posisi {name} sekarang berada di {currentPosition.Name} ({currentPosition.GetType().Name})");
 		}
-		catch (Exception ex){
+		catch (Exception ex)
+		{
 			Console.WriteLine("Terjadi kesalahan : " + ex.Message);
 		}
-		
+
 	}
 
-	public static void GetPropertiesInfo(){
+	public static void GetPropertiesInfo()
+	{
 		IPlayer currentPlayer = game.GetCurrentPlayer();
-		if(currentPlayer == null){
+		if (currentPlayer == null)
+		{
 			Console.WriteLine("Tidak ada pemain saat ini");
 			return;
 		}
@@ -232,46 +282,52 @@ class Program
 			Console.WriteLine("Terjadi kesalahan : " + ex.Message);
 		}
 	}
-	
 
-// 	public static void BuyPropertyPlayer(IPlayer player)
-// {
-//     PlayerData data = GetPlayerData(player);
-//     ISquare currentSquare = data.playerPosition;
-//     if (currentSquare is Property property)
-//     {
-//         if (property.Owner == null)
-//         {
-//             Console.WriteLine($"\nApakah Player {player.Name} ingin membeli {property.Name} seharga {property.Price}? (Y/N)");
-//             string input = Console.ReadLine();
-//             if (input?.Trim().ToUpper() == "Y")
-//             {
-//                 if (data.Balance >= property.Price)
-//                 {
-//                     property.BuyProperty(player, game);
-//                     Console.WriteLine($"Player {player.Name} membeli {property.Name}.");
-//                 }
-//                 else
-//                 {
-//                     Console.WriteLine($"Player {player.Name} tidak memiliki cukup uang untuk membeli {property.Name}.");
-//                 }
-//             }
-//         }
-//         else
-//         {
-//             if (property.Owner != player)
-//             {
-//                 property.PayRent(player, game);
-//                 GetPlayerData(property.Owner).AddBalance(property.RentPrice);
-//                 Console.WriteLine($"Player {player.Name} membayar sewa {property.RentPrice} kepada {property.Owner.Name}.");
-//             }
-//         }
-//     }
-//     else
-//     {
-//         currentSquare.EffectSquare(player, game);
-//     }
-// }
+	public static void BuyPropertyPlayer()
+	{
+		IPlayer currentPlayer = game.GetCurrentPlayer();
+		ISquare currentPosition = game.GetPlayerPosition(currentPlayer);
+		if (currentPosition is Property property)
+		{
+			if (property.Owner == null)
+			{
+				Console.WriteLine($"Apakah player {currentPlayer.Name} ingin membeli {property.Name} seharga {property.Price}? (Y/N)");
+				string input = Console.ReadLine();
+				if (input?.Trim().ToLower() == "Y")
+				{
+					var balancePlayer = game.GetPlayerBalance(currentPlayer);
+					if (balancePlayer >= property.Price)
+					{
+						property.BuyProperty(currentPlayer, game);
+						Console.WriteLine($"Player {currentPlayer.Name} telah membeli {property.Name}");
+					}
+					else
+					{
+						Console.WriteLine($"Player {currentPlayer.Name} tidak memiliki cukup uang untuk membeli {property.Name}");
+					}
+				}
+			}
+			else
+			{
+				if (property.Owner != currentPlayer)
+				{
+
+					property.PayRent(currentPlayer, game);
+
+					int rentAmount = property.RentPrice;
+					game.GetPlayerProperty(property.Owner);
+					int ownerBalance = game.GetPlayerBalance(property.Owner);
+					int newOwnerBalance = ownerBalance += rentAmount;
+					game.UpdatePlayerBalance(currentPlayer, newOwnerBalance);
+					Console.WriteLine($"Player {currentPlayer.Name} membayar sewa {property.RentPrice} kepada {property.Owner.Name}.");
+				}
+			}
+		}
+		else
+		{
+			currentPosition.EffectSquare(currentPlayer, game);
+		}
+	}
 
 
 	private static void ChanceCardAll()

@@ -29,9 +29,6 @@ public class PlayerData
     public void DeductBalance(int cash){
         Balance -= cash;
     }
-    // public int GetBalance(){
-    //     return Balance;
-    // }
     public void SetPosition(ISquare newPosition){
         playerPosition = newPosition;
     }

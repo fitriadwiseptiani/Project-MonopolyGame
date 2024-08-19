@@ -24,7 +24,7 @@ public class Property : ISquare
 	}
 	public bool EffectSquare(IPlayer player, GameController game)
 	{
-		return false;
+		return true;
 	}
 	public void PayRent(IPlayer player, GameController game)
 	{

@@ -114,6 +114,12 @@ public class GameController
 		}
 		throw new Exception();
 	}
+	public int GetPlayerPositionIndex(IPlayer player)
+	{
+		ISquare playerSquare = GetPlayerPosition(player);
+		return _board.SquareBoard.IndexOf(playerSquare);
+	}
+
 	public void SetTurnPlayer(IPlayer player)
 	{
 		_dice.RollTwoDice(out int firstRoll, out int secondRoll, out int totalRoll);
