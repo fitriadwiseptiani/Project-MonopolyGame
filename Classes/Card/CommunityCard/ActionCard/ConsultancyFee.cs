@@ -11,7 +11,11 @@ public class ConsultancyFee : CardCommunity
     }
     public bool ActionCard(IPlayer player, GameController game)
     {
-        game.GetPlayerData(player).AddBalance(25);
+        int currentBalance = game.GetPlayerBalance(player);
+
+        int newBalance = currentBalance - 25;
+
+        game.UpdatePlayerBalance(player, newBalance);
         return true;
     }
 }

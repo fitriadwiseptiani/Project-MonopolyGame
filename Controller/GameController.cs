@@ -35,7 +35,7 @@ public class GameController
 	{
 		try
 		{
-			if (_players.Count < _maxPlayer) // Change <= to < to ensure max player limit
+			if (_players.Count <= _maxPlayer) // Change <= to < to ensure max player limit
 			{
 				SetStartPlayerPosition(_board, playerData);
 				_players[player] = playerData;
@@ -56,7 +56,7 @@ public class GameController
 	}
 	public bool Start()
 	{
-		if (!(_players.Count == 2))
+		if (_players.Count == 2 || _players.Count <= _maxPlayer)
 		{
 			_gameStatus = GameStatus.Play;
 			return true;
@@ -71,10 +71,55 @@ public class GameController
 	{
 		return _players.Keys.ToList();
 	}
-	public PlayerData GetPlayerData(IPlayer player)
-	{
-		return _players[player];
+	public int GetPlayerId(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return player.Id;
+		}
+		throw new Exception();
 	}
+	public string GetPlayerName(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return player.Name;
+		}
+		throw new Exception();
+	}
+	public PlayerPieces GetPlayerPiece(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return _players[player].Piece;
+		}
+		throw new Exception();
+	}
+	public int GetPlayerBalance(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return _players[player].Balance;
+		}
+		throw new Exception();
+	}
+	public List<Property> GetPlayerProperty(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return _players[player].propertyPlayer;
+		}
+		throw new Exception();
+	}
+	public List<ICard> GetPlayerCardSave(IPlayer player){
+		if(_players.ContainsKey(player)){
+			return _players[player].cardSpesialSave;
+		}
+		throw new Exception();
+	}
+	public ISquare GetPlayerPosition(IPlayer player){
+		if (_players.ContainsKey(player))
+		{
+			return _players[player].playerPosition;
+		}
+		throw new Exception();
+	}
+	public int GetPlayerPositionIndex(IPlayer player)
+	{
+		ISquare playerSquare = GetPlayerPosition(player);
+		return _board.SquareBoard.IndexOf(playerSquare);
+	}
+
 	public void SetTurnPlayer(IPlayer player)
 	{
 		_dice.RollTwoDice(out int firstRoll, out int secondRoll, out int totalRoll);
@@ -105,16 +150,17 @@ public class GameController
 	}
 	public void MovePlayer(IPlayer player, int diceResult)
 	{
-		PlayerData data = GetPlayerData(player);
-		int currentIndex = GetPlayerPosition(data);
+		ISquare currentPosition = GetPlayerPosition(player);
+		int currentIndex = _board.SquareBoard.IndexOf(currentPosition);
+
 		int newIndex = (currentIndex + diceResult) % _board.SquareBoard.Count;
 
-		data.playerPosition = _board.SquareBoard[newIndex];
+		ISquare newPosition = _board.SquareBoard[newIndex];
+		_players[player].playerPosition = newPosition;
 	}
 	public bool DeclareBankrupt(IPlayer player)
 	{
-		PlayerData playerData = GetPlayerData(player);
-		return GetPlayerData(player).Balance <= 0 && !playerData.propertyPlayer.Any();
+		return GetPlayerBalance(player) <= 0 && !GetPlayerProperty(player).Any();
 	}
 	public void SetChanceCards(List<ICard> chanceCards)
 	{
@@ -150,25 +196,24 @@ public class GameController
 	}
 	public void HandleGoToJail(IPlayer player)
 	{
-		PlayerData data = GetPlayerData(player);
-		var positionPlayer = _board.SquareBoard[10];
-		data.playerPosition = positionPlayer;
+		var newPosition = _board.SquareBoard[10];
+		_players[player].playerPosition = newPosition;
 		ChangeTurnPlayer();
 	}
 	public void MovePlayerToSquare(IPlayer player, ISquare targetSquare)
 	{
-		PlayerData data = GetPlayerData(player);
-		int currentIndex = GetPlayerPosition(data);
+		// ISquare currentPosition = GetPlayerPosition(player);
 		int targetIndex = _board.SquareBoard.IndexOf(targetSquare);
-		// Perbarui posisi pemain
-		data.playerPosition = targetSquare;
+
+		ISquare newPosition = _board.SquareBoard[targetIndex];
+		_players[player].playerPosition = newPosition;
 	}
 	public void HandleGetOutJail(IPlayer player)
 	{
-		PlayerData data = GetPlayerData(player);
+		var data = _players[player];
 		data.DeductBalance(50);
-		var positionPlayer = _board.SquareBoard[10];
-		data.playerPosition = positionPlayer;
+		var newPosition = _board.SquareBoard[10];
+		_players[player].playerPosition = newPosition;
 	}
 	// public bool HandleSquareEffect(IPlayer player, ISquare square){
 
@@ -180,10 +225,22 @@ public class GameController
 	{
 		if (player == player)
 		{
-			GetPlayerData(player).DeductBalance(15);
+			var data = _players[player];
+			data.DeductBalance(amountOfMoney);
 			return true;
 		}
 		return false;
+	}
+	public void UpdatePlayerBalance(IPlayer player, int newBalance)
+	{
+		if (_players.ContainsKey(player))
+		{
+			_players[player].Balance = newBalance;
+		}
+		else
+		{
+			throw new Exception("Player tidak ditemukan.");
+		}
 	}
 	public bool CheckWinner()
 	{

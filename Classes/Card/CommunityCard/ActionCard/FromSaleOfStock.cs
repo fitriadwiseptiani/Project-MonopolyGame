@@ -11,7 +11,11 @@ public class FromSaleOfStock : CardCommunity
 	}
 	public bool ActionCard(IPlayer player, GameController game)
 	{
-		game.GetPlayerData(player).AddBalance(50);
+		int currentBalance = game.GetPlayerBalance(player);
+
+		int newBalance = currentBalance + 50;
+
+		game.UpdatePlayerBalance(player, newBalance);
 		return true;
 	}
 }

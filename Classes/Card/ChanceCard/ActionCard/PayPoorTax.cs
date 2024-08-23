@@ -11,7 +11,6 @@ public class PayPoorTax : CardChance
     }
     public bool ActionCard(IPlayer player, GameController game)
     {
-        PlayerData playerData = game.GetPlayerData(player);
         game.PayTax(player, 15);
         return true;
     }
