@@ -19,6 +19,9 @@ class Program
 		ChanceCardAll();
 		CommunityCardAll();
 
+		
+		DisplayBoard(board,game);
+
 		CheckGameStatus();
 
 		while (CheckGameStatus() != GameStatus.End)
@@ -47,16 +50,14 @@ class Program
 						IPlayer currentPlayer = game.GetCurrentPlayer();
 						Console.WriteLine($"Giliran {currentPlayer.Name}");
 
-						// Start turn for the current player
 						game.StartTurn();
 						game.SetTurnPlayer(currentPlayer);
-						GetDice();
+						GetDice(dice, currentPlayer);
 						GetPlayerInfo();
 						GetPropertiesInfo();
 						DisplayBoard(board, game);
 						BuyPropertyPlayer();
 						game.EndTurn();
-						// // Change player turn
 						game.ChangeTurnPlayer();
 					}
 					game.End();
@@ -80,16 +81,16 @@ class Program
 		GameStatus currentStatus = game.GetStatusGame();
 		if (currentStatus == GameStatus.Preparation)
 		{
-			Console.WriteLine("Permainan akan segera disiapkan");
+			Console.WriteLine("\nPermainan akan segera disiapkan");
 
 		}
 		else if (currentStatus == GameStatus.Play)
 		{
-			Console.WriteLine("Permainan akan dimulai");
+			Console.WriteLine("\nPermainan akan dimulai");
 		}
 		else if (currentStatus == GameStatus.End)
 		{
-			Console.WriteLine("Permainan telah berakhir");
+			Console.WriteLine("\nPermainan telah berakhir");
 		}
 		return currentStatus;
 	}
@@ -203,19 +204,16 @@ class Program
 			result3 = sr.ReadToEnd();
 		}
 		List<Railroads> railroadsMonopoly = JsonSerializer.Deserialize<List<Railroads>>(result3);
-		// city
 		foreach (var city in cityMonopoly)
 		{
 			board.SquareBoard.Add(city);
 		}
 
-		// railroads
 		foreach (var railroad in railroadsMonopoly)
 		{
 			board.SquareBoard.Add(railroad);
 		}
 
-		// Add
 		foreach (var utility in utilitiesMonopoly)
 		{
 			board.SquareBoard.Add(utility);
@@ -243,63 +241,69 @@ class Program
 		}
 
 	}
+
 	static void DisplayBoard(IBoard board, GameController game)
 	{
+		Console.Clear();
+		Console.WriteLine("Board Layout:");
 
-		for (int i = 20; i >= 10; i--)
+		for (int i = 0; i <= 10; i++)
 		{
 			var square = board.SquareBoard[i];
 			string playerPosition = GetPlayerMarker(game, i);
-			Console.Write($"[{(square.Id.ToString() + playerPosition).PadRight(10)}]");
-
+			Console.Write($"[{(square.Id.ToString() + playerPosition).PadRight(5)}]");
 		}
 		Console.WriteLine();
 
-		for (int i = 0; i < 9; i++)
-		{
-			var leftSquare = board.SquareBoard[30 + i];
-			var rightSquare = board.SquareBoard[20 - i];
-			string leftMarker = GetPlayerMarker(game, 30 + i);
-			string rightMarker = GetPlayerMarker(game, 20 - i);
-
-			Console.Write($"[{(leftSquare.Id.ToString() + leftMarker).PadRight(10)}]");
-			for (int j = 0; j < 7; j++)
+		for (int i = 0; i <= 8; i++)
 			{
-				Console.Write(" ".PadRight(20));
+				var leftSquare = board.SquareBoard[39 - i];
+				var rightSquare = board.SquareBoard[11 + i];
+				string leftMarker = GetPlayerMarker(game, 39 - i);
+				string rightMarker = GetPlayerMarker(game, 11 + i);
+
+				Console.Write($"[{(leftSquare.Id.ToString() + leftMarker).PadRight(5)}]");
+				for (int j = 0; j < 5; j++)
+				{
+					Console.Write(" ".PadRight(45));
+				}
+
+				Console.WriteLine($"[{(rightSquare.Id.ToString() + rightMarker).PadRight(5)}]");
+
 			}
-
-			Console.WriteLine($"[{(rightSquare.Id.ToString() + rightMarker).PadRight(10)}]");
-
-		}
-
-		for (int i = 0; i <= 9; i++)
+		Console.WriteLine();
+		for (int i = 0; i < 10; i++)
 		{
-			var square = board.SquareBoard[i];
-			string playerMarker = GetPlayerMarker(game, i);
-			Console.Write($"[{(square.Id.ToString() + playerMarker).PadRight(10)}]");
+			var square = board.SquareBoard[30-i];
+			string playerPosition = GetPlayerMarker(game, i);
+			Console.Write($"[{(square.Id.ToString() + playerPosition).PadRight(5)}]");
 		}
 		Console.WriteLine();
-
 	}
+
 	static string GetPlayerMarker(GameController game, int positionIndex)
 	{
 		foreach (var player in game.GetPlayers())
 		{
-			var position = game.GetPlayerPosition(player);
-			int playerIndex = game.GetBoard().SquareBoard.IndexOf(position);
-			if (playerIndex == positionIndex)
+			var playerPosition = game.GetPlayers()
+			.Where(player =>
 			{
-				return $"({player.Name})";
+				var position = game.GetPlayerPosition(player);
+				int playerIndex = game.GetBoard().SquareBoard.IndexOf(position);
+				return playerIndex == positionIndex;
+			})
+			.Select(player => player.Name);
+			
+			if (playerPosition.Any())
+			{
+				return $"({string.Join(", " , playerPosition)})";
 			}
 		}
-		return "";
+		return string.Empty;
 	}
-	public static void GetDice(){
-		IPlayer currentPlayer = game.GetCurrentPlayer();
-		IDice dice = new Dice(new int[] { 1, 2, 3, 4, 5, 6, });
-		 var totalDice = dice.RollTwoDice(out int firstRoll, out int secondRoll, out int totalRoll);
-		 Console.WriteLine($"{currentPlayer.Name} mendapatkan hasil lemparan dadu sebesar {firstRoll} dan {secondRoll} dengan total {totalDice}");
-
+	public static void GetDice(IDice dice, IPlayer player){
+		var totalDice = dice.RollTwoDice(out int firstRoll, out int secondRoll, out int totalRoll);
+		Console.WriteLine($"{player.Name} mendapatkan hasil lemparan dadu sebesar {firstRoll} dan {secondRoll} dengan total {totalRoll}");
 	}
 	public static void GetPlayerInfo()
 	{
