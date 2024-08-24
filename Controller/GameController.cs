@@ -228,9 +228,17 @@ public class GameController
 	// public bool HandleSquareEffect(IPlayer player, ISquare square){
 
 	// }
-	// public bool HandleCardEffect(IPlayer player, ICard card){
-
-	// }
+	public ICard HandleCardFromSquare(ISquare square){
+		if (square is CardChanceSquare chanceSquare)
+		{
+			return DrawCardChance(); 
+		}
+		else if (square is CardCommunitySquare communitySquare)
+		{
+			return DrawCardCommunity(); 
+		}
+		return null;
+	}
 	public bool PayTax(IPlayer player, int amountOfMoney)
 	{
 		if (player == player)

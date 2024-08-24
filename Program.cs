@@ -48,17 +48,34 @@ class Program
 
 			while (!game.CheckWinner()){
 						IPlayer currentPlayer = game.GetCurrentPlayer();
-						Console.WriteLine($"Giliran {currentPlayer.Name}");
+						Console.WriteLine($"\nGiliran {currentPlayer.Name}");
 
-						game.StartTurn();
+
+						StartTurnPlayer();
 						game.SetTurnPlayer(currentPlayer);
 						GetDice(dice, currentPlayer);
 						GetPlayerInfo();
 						GetPropertiesInfo();
-						DisplayBoard(board, game);
 						BuyPropertyPlayer();
+						// ChooseActionPlayer(out int choice);
+						// 	switch (choice){
+						// 		case 1:
+
+						// 			break;
+						// 		case 2:
+						// 			break;
+						// 		case 3:
+						// 			break;
+						// 		case 4:
+						// 			break;
+
+						// 	}
+						
 						game.EndTurn();
-						game.ChangeTurnPlayer();
+						DisplayBoard(board, game);
+						
+
+
 					}
 					game.End();
 					IPlayer winner = game.GetWinner();
@@ -94,6 +111,69 @@ class Program
 		}
 		return currentStatus;
 	}
+	static void StartTurnPlayer(){
+		Console.WriteLine("\nApakah Anda ingin memulai giliran untuk bermain ? (Y)");
+		string inputPlayer = Console.ReadLine();
+			
+			if (inputPlayer.ToLower() == "Y")
+			{
+				game.StartTurn();
+			}
+			else
+			{
+				Console.WriteLine("\nTolong masukkan input yang valid");
+			Console.WriteLine("\nApakah Anda ingin memulai giliran untuk bermain ? (Y)");
+			inputPlayer = Console.ReadLine();
+		}
+		
+	}
+	static void EndTurnPlayer(){
+		Console.WriteLine("\nApakah Anda ingin mengakhiri giliran ? (Y/N)");
+		string inputPlayer = Console.ReadLine();
+
+		if (inputPlayer.ToLower() == "Y")
+		{
+			game.ChangeTurnPlayer();
+		}
+		else if(inputPlayer.ToLower() == "N"){
+			Console.WriteLine("\nTolong masukkan input yang valid");
+			Console.WriteLine("\nApakah Anda ingin memulai giliran untuk bermain ? (Y)");
+			inputPlayer = Console.ReadLine();
+		}
+		else{
+			Console.WriteLine("\nTolong masukkan input yang valid");
+		}
+	}
+	static void ChooseActionPlayer(out int action){
+		action = 0;
+		bool validInput = false;
+
+		int maxPlayer = 8;
+		while (!validInput)
+		{
+
+			Console.WriteLine("\nPlease choose one of this following action ");
+			Console.WriteLine("1. Upgrade Property");
+			Console.WriteLine("2. Sell Property");
+			Console.WriteLine("3. Declare bankrupt");
+			Console.WriteLine("4. End Turn");
+			Console.WriteLine();
+			Console.Write("Your Input : ");
+			Console.WriteLine();
+			bool status = int.TryParse(Console.ReadLine(), out int input);
+			if (status && input >= 1 && input <= 4)
+			{
+				action = input;
+				validInput = true;
+			}
+			else
+			{
+				Console.WriteLine("Please input valid number (1-4)");
+				Thread.Sleep(1000);
+			}
+		}
+
+	}
 	static void ChooseAction(out int action)
 	{
 		action = 0;
@@ -124,7 +204,7 @@ class Program
 			}
 			else
 			{
-				Console.WriteLine("Please input valid number (1-3)");
+				Console.WriteLine("Please input valid number (1-2)");
 				Thread.Sleep(1000);
 			}
 		}
@@ -204,6 +284,9 @@ class Program
 			result3 = sr.ReadToEnd();
 		}
 		List<Railroads> railroadsMonopoly = JsonSerializer.Deserialize<List<Railroads>>(result3);
+		board.SquareBoard.Clear();
+		
+
 		foreach (var city in cityMonopoly)
 		{
 			board.SquareBoard.Add(city);
@@ -219,18 +302,18 @@ class Program
 			board.SquareBoard.Add(utility);
 		}
 
-		board.SquareBoard.Add(new GoSquare(1, "Go Square", "Go"));
-		board.SquareBoard.Add(new LuxuryTaxSquare(5, "Luxury Tax Square", "Luxury Tax"));
-		board.SquareBoard.Add(new JailSquare(11, "Jail Square", "Jail"));
-		board.SquareBoard.Add(new IncomeTaxSquare(21, "Income Tax Square", "Income Tax"));
-		board.SquareBoard.Add(new GoToJailSquare(31, "GoToJailSquare", "Go to Jail"));
-		board.SquareBoard.Add(new FreeParkingSquare(21, "Go To Jail Square", "Free Parking"));
-		board.SquareBoard.Add(new CardCommunitySquare(3, "Card Community Square", "Community Chest"));
-		board.SquareBoard.Add(new CardCommunitySquare(18, "Card Community Square", "Community Chest"));
-		board.SquareBoard.Add(new CardCommunitySquare(34, "Card Community Square", "Community Chest"));
-		board.SquareBoard.Add(new CardChanceSquare(8, "Card Chance Square", "Chance"));
-		board.SquareBoard.Add(new CardChanceSquare(23, "Card Chance Square", "Chance"));
-		board.SquareBoard.Add(new CardChanceSquare(37, "Card Chance Square", "Chance"));
+		board.SquareBoard.Add(new GoSquare(1, "Go Square","GO", "Go"));
+		board.SquareBoard.Add(new LuxuryTaxSquare(5, "Luxury Tax Square", "LUX", "Luxury Tax"));
+		board.SquareBoard.Add(new JailSquare(11, "Jail Square","JAIL", "Jail"));
+		board.SquareBoard.Add(new IncomeTaxSquare(21, "Income Tax Square","TAX", "Income Tax"));
+		board.SquareBoard.Add(new GoToJailSquare(31, "Go To Jail Square","GTJ", "Go to Jail"));
+		board.SquareBoard.Add(new FreeParkingSquare(21, "Free Parking","FRE", "Free Parking"));
+		board.SquareBoard.Add(new CardCommunitySquare(3, "Card Community Square","COM", "Community Chest"));
+		board.SquareBoard.Add(new CardCommunitySquare(18, "Card Community Square","COM", "Community Chest"));
+		board.SquareBoard.Add(new CardCommunitySquare(34, "Card Community Square","COM", "Community Chest"));
+		board.SquareBoard.Add(new CardChanceSquare(8, "Card Chance Square","CAN", "Chance"));
+		board.SquareBoard.Add(new CardChanceSquare(23, "Card Chance Square","CAN", "Chance"));
+		board.SquareBoard.Add(new CardChanceSquare(37, "Card Chance Square","CAN", "Chance"));
 
 		var sortedSquares = board.SquareBoard.OrderBy(square => square.Id).ToList();
 
@@ -251,32 +334,32 @@ class Program
 		{
 			var square = board.SquareBoard[i];
 			string playerPosition = GetPlayerMarker(game, i);
-			Console.Write($"[{(square.Id.ToString() + playerPosition).PadRight(5)}]");
+			Console.Write($"[{(square.Code + playerPosition).PadRight(5)}]");
 		}
 		Console.WriteLine();
 
 		for (int i = 0; i <= 8; i++)
 			{
-				var leftSquare = board.SquareBoard[39 - i];
+				var leftSquare = board.SquareBoard[40 - i];
 				var rightSquare = board.SquareBoard[11 + i];
-				string leftMarker = GetPlayerMarker(game, 39 - i);
-				string rightMarker = GetPlayerMarker(game, 11 + i);
+				string leftMarker = GetPlayerMarker(game, leftSquare.Id);
+				string rightMarker = GetPlayerMarker(game, rightSquare.Id);
 
-				Console.Write($"[{(leftSquare.Id.ToString() + leftMarker).PadRight(5)}]");
+				Console.Write($"[{(leftSquare.Code + leftMarker).PadRight(5)}]");
 				for (int j = 0; j < 5; j++)
 				{
 					Console.Write(" ".PadRight(45));
 				}
 
-				Console.WriteLine($"[{(rightSquare.Id.ToString() + rightMarker).PadRight(5)}]");
+				Console.WriteLine($"[{(rightSquare.Code + rightMarker).PadRight(5)}]");
 
 			}
 		Console.WriteLine();
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i <= 10; i++)
 		{
-			var square = board.SquareBoard[30-i];
-			string playerPosition = GetPlayerMarker(game, i);
-			Console.Write($"[{(square.Id.ToString() + playerPosition).PadRight(5)}]");
+			var square = board.SquareBoard[31-i];
+			string playerPosition = GetPlayerMarker(game, square.Id);
+			Console.Write($"[{(square.Code + playerPosition).PadRight(5)}]");
 		}
 		Console.WriteLine();
 	}
@@ -375,6 +458,8 @@ class Program
 			{
 				Console.WriteLine("Posisi saat ini bukan properti.");
 				currentPosition.EffectSquare(currentPlayer, game);
+				GetSquareDescribe(currentPosition, game);
+
 			}
 		}
 		catch (Exception ex)
@@ -422,13 +507,16 @@ class Program
 				}
 			}
 		}
-		else
+		else 
 		{
+
 			currentPosition.EffectSquare(currentPlayer, game);
+			GetSquareDescribe(currentPosition, game);
+			
 		}
 	}
 
-
+	
 	static void ChanceCardAll()
 	{
 		var chanceCards = new List<ICard>
@@ -467,5 +555,40 @@ class Program
 			new YouInherit(12, "Kamu terpilih untuk mendapatkan uang 100, selamat yaa")
 		};
 		game.SetCommunityCards(communityCards);
+	}
+	static void CardDescribe(ICard card)
+	{
+			string cardClassName = card.GetType().Name;
+			Console.WriteLine($"Card Name : {cardClassName}");
+			Console.WriteLine($"Description : {card.Description}");
+			Console.WriteLine();
+		
+			
+		}
+	
+	static void GetSquareDescribe(ISquare square, GameController game){
+		if (square is SpecialSquare specialSquare)
+		{
+			Console.WriteLine($"Name       : {specialSquare.Name}");
+			Console.WriteLine($"Code       : {specialSquare.Code}");
+			Console.WriteLine($"Description: {specialSquare.Description}");
+			Console.WriteLine("---------------------------------");
+			if(square is CardChanceSquare chanceSquare){
+				Console.WriteLine("This is Community Card Square");
+				ICard card = game.DrawCardCommunity();
+				if(card != null){
+					CardDescribe(card);
+				}
+			}
+			else if (square is CardCommunitySquare communitySquare)
+			{
+				Console.WriteLine("This is a chance card square");
+				ICard card = game.DrawCardChance();
+				if (card != null)
+				{
+					CardDescribe(card);
+				}
+			}
+		}
 	}
 }

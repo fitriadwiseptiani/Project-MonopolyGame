@@ -2,24 +2,28 @@
     {
         "Id": 6,
         "Name": "TLV Airport",
+        "Code": "TLV",
         "Price": 200,
         "RentPrice": 25
     },
     {
         "Id": 16,
         "Name": "MUC Airport",
+        "Code": "MUC",
         "Price": 200,
         "RentPrice": 25
     },
     {
         "Id": 26,
         "Name": "CDG Airport",
+        "Code": "CDG",
         "Price": 200,
         "RentPrice": 25
     },
     {
         "Id": 36,
         "Name": "JFK Airport",
+        "Code": "JFK",
         "Price": 200,
         "RentPrice": 25
     }

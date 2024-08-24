@@ -5,15 +5,17 @@ public class Property : ISquare
 {
 	public int Id { get; private set; }
 	public string Name { get; private set; }
+	public string Code { get; private set; }
 	public int Price { get; private set; }
 	public int RentPrice { get; private set; }
 	public string Description { get; private set; }
 	public IPlayer Owner { get; private set; }
 
-	public Property(int id, string name, int price, int rentPrice)
+	public Property(int id, string name, string code, int price, int rentPrice)
 	{
 		Id = id;
 		Name = name;
+		Code = code;
 		Price = price;
 		RentPrice = rentPrice;
 		Owner = null;

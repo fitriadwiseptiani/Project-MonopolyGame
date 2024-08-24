@@ -3,7 +3,7 @@ namespace MonopolyGame;
 public class LuxuryTaxSquare : SpecialSquare, ISquare
 {
 
-	public LuxuryTaxSquare(int id, string name, string description) : base(id, name, description)
+	public LuxuryTaxSquare(int id, string name,string code, string description) : base(id, name, code, description)
 	{
 	}
 	public bool EffectSquare(IPlayer player, GameController game)
