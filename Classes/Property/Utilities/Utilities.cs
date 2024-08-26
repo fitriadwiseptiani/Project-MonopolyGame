@@ -4,8 +4,8 @@ public class Utilities : Property, ISquare
 {
     public int RentPrice { get; private set; }
 
-    public Utilities(int id, string name, int price, int rentPrice)
-        : base(id, name, price, rentPrice)
+    public Utilities(int id, string name,string code, int price, int rentPrice)
+        : base(id, name,code, price, rentPrice)
     {
         RentPrice = rentPrice;
     }

@@ -27,6 +27,18 @@ public class GameController
 		_communityCards = new List<ICard>();
 		
 	}
+	public GameStatus GetStatusGame(){
+		if (_players.Count == 0){
+			_gameStatus = GameStatus.Preparation;
+		}
+		else if (Start()==true){
+			_gameStatus = GameStatus.Play;
+		}
+		else{
+			_gameStatus = GameStatus.End;
+		}
+		return _gameStatus;
+	}
 	public Board GetBoard()
 	{
 		return (Board)_board;
@@ -35,7 +47,7 @@ public class GameController
 	{
 		try
 		{
-			if (_players.Count <= _maxPlayer) // Change <= to < to ensure max player limit
+			if (_players.Count <= _maxPlayer) 
 			{
 				SetStartPlayerPosition(_board, playerData);
 				_players[player] = playerData;
@@ -56,12 +68,7 @@ public class GameController
 	}
 	public bool Start()
 	{
-		if (_players.Count == 2 || _players.Count <= _maxPlayer)
-		{
-			_gameStatus = GameStatus.Play;
-			return true;
-		}
-		return false;
+		return true;
 	}
 	public bool End()
 	{
@@ -88,6 +95,9 @@ public class GameController
 			return _players[player].Piece;
 		}
 		throw new Exception();
+	}
+	public bool PieceTaken(PlayerPieces piece){
+		return _players.Any(p => p.Value.Piece == piece);
 	}
 	public int GetPlayerBalance(IPlayer player){
 		if(_players.ContainsKey(player)){
@@ -218,9 +228,17 @@ public class GameController
 	// public bool HandleSquareEffect(IPlayer player, ISquare square){
 
 	// }
-	// public bool HandleCardEffect(IPlayer player, ICard card){
-
-	// }
+	public ICard HandleCardFromSquare(ISquare square){
+		if (square is CardChanceSquare chanceSquare)
+		{
+			return DrawCardChance(); 
+		}
+		else if (square is CardCommunitySquare communitySquare)
+		{
+			return DrawCardCommunity(); 
+		}
+		return null;
+	}
 	public bool PayTax(IPlayer player, int amountOfMoney)
 	{
 		if (player == player)

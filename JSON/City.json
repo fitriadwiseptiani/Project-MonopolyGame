@@ -2,138 +2,161 @@
     {
       "Id": 2,
       "Name": "Salvador",
+      "Code": "SLV",
       "Price": 60,
       "RentPrice": 2
     },
     {
       "Id": 4,
       "Name": "Rio",
+      "Code": "RIO",
       "Price": 60,
       "RentPrice": 4
     },
     {
       "Id": 7,
       "Name": "Tel Aviv",
+      "Code": "TAV",
       "Price": 100,
       "RentPrice": 6
     },
     {
       "Id": 9,
       "Name": "Haifa",
+      "Code": "HFA",
       "Price": 100,
       "RentPrice": 6
     },
     {
       "Id": 10,
       "Name": "Jerusalem",
+      "Code": "JSM",
       "Price": 120,
       "RentPrice": 8
     },
     {
       "Id": 12,
       "Name": "Venice",
+      "Code": "VNC",
       "Price": 140,
       "RentPrice": 10
     },
     {
       "Id": 14,
       "Name": "Milan",
+      "Code": "MLN",
       "Price": 140,
       "RentPrice": 10
     },
     {
       "Id": 15,
       "Name": "Rome",
+      "Code": "ROM",
       "Price": 160,
       "RentPrice": 12
     },
     {
       "Id": 17,
       "Name": "Frankfurt",
+      "Code": "FKF",
       "Price": 180,
       "RentPrice": 14
     },
     {
       "Id": 19,
       "Name": "Munich",
+      "Code": "MNC",
       "Price": 180,
       "RentPrice": 14
     },
     {
       "Id": 20,
       "Name": "Berlin",
+      "Code": "BLN",
       "Price": 200,
       "RentPrice": 16
     },
     {
       "Id": 22,
       "Name": "Shenzhen",
+      "Code": "SNZ",
       "Price": 220,
       "RentPrice": 18
     },
     {
       "Id": 24,
       "Name": "Beijing",
+      "Code": "BJG",
       "Price": 220,
       "RentPrice": 18
     },
     {
       "Id": 25,
       "Name": "Shanghai",
+      "Code": "SGH",
       "Price": 240,
       "RentPrice": 20
     },
     {
       "Id": 27,
       "Name": "Lyon",
+      "Code": "LYN",
       "Price": 260,
       "RentPrice": 22
     },
     {
       "Id": 28,
       "Name": "Toulouse",
+      "Code": "TLS",
       "Price": 260,
       "RentPrice": 22
     },
     {
       "Id": 30,
       "Name": "Paris",
+      "Code": "PRS",
       "Price": 280,
       "RentPrice": 24
     },
 {
       "Id": 32,
       "Name": "Liverpool",
+      "Code": "LPL",
       "Price": 300,
       "RentPrice": 26
     },
     {
       "Id": 33,
       "Name": "Manchester",
+      "Code": "MCT",
       "Price": 300,
       "RentPrice": 26
     },
     {
       "Id": 35,
       "Name": "London",
+      "Code": "LDN",
       "Price": 320,
       "RentPrice": 28
     },
     {
       "Id": 38,
       "Name": "San Francisco",
+      "Code": "SFC",
       "Price": 350,
       "RentPrice": 35
     },
     {
       "Id": 39,
       "Name": "Sukolilo",
+      "Code": "SKL",
       "Price": 350,
       "RentPrice": 35
     },
     {
       "Id": 40,
       "Name": "New York",
+      "Code": "NYC",
       "Price": 400,
       "RentPrice": 50
     }
