@@ -57,25 +57,11 @@ class Program
 						GetPlayerInfo();
 						GetPropertiesInfo();
 						BuyPropertyPlayer();
-						// ChooseActionPlayer(out int choice);
-						// 	switch (choice){
-						// 		case 1:
-
-						// 			break;
-						// 		case 2:
-						// 			break;
-						// 		case 3:
-						// 			break;
-						// 		case 4:
-						// 			break;
-
-						// 	}
-						
 						game.EndTurn();
+						EndTurnPlayer();
 						DisplayBoard(board, game);
+						game.ChangeTurnPlayer();
 						
-
-
 					}
 					game.End();
 					IPlayer winner = game.GetWinner();
@@ -144,36 +130,6 @@ class Program
 			Console.WriteLine("\nTolong masukkan input yang valid");
 		}
 	}
-	static void ChooseActionPlayer(out int action){
-		action = 0;
-		bool validInput = false;
-
-		int maxPlayer = 8;
-		while (!validInput)
-		{
-
-			Console.WriteLine("\nPlease choose one of this following action ");
-			Console.WriteLine("1. Upgrade Property");
-			Console.WriteLine("2. Sell Property");
-			Console.WriteLine("3. Declare bankrupt");
-			Console.WriteLine("4. End Turn");
-			Console.WriteLine();
-			Console.Write("Your Input : ");
-			Console.WriteLine();
-			bool status = int.TryParse(Console.ReadLine(), out int input);
-			if (status && input >= 1 && input <= 4)
-			{
-				action = input;
-				validInput = true;
-			}
-			else
-			{
-				Console.WriteLine("Please input valid number (1-4)");
-				Thread.Sleep(1000);
-			}
-		}
-
-	}
 	static void ChooseAction(out int action)
 	{
 		action = 0;
@@ -222,11 +178,6 @@ class Program
 			Console.WriteLine("\nPlayer was existing at the game, please tryy to input other name");
 			Console.WriteLine($"\nInput name for player {playerId}: ");
 			playerName = Console.ReadLine();
-			// foreach (var player in game.GetPlayers()){
-			// if(player.Name.Equals(playerName, StringComparison.OrdinalIgnoreCase)){
-			// 	Console.WriteLine("Player was existing at the game, please tryy to input other name");
-			// 	return;
-			// }
 		}
 		Console.WriteLine("\nChoose one as your piece : ");
 		foreach (var piece in Enum.GetValues(typeof(PlayerPieces)))
@@ -348,7 +299,7 @@ class Program
 				Console.Write($"[{(leftSquare.Code + leftMarker).PadRight(5)}]");
 				for (int j = 0; j < 5; j++)
 				{
-					Console.Write(" ".PadRight(45));
+					Console.Write(" ".PadRight(42));
 				}
 
 				Console.WriteLine($"[{(rightSquare.Code + rightMarker).PadRight(5)}]");
